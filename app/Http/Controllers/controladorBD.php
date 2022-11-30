@@ -102,7 +102,8 @@ class controladorBD extends Controller
 
     public function destroy($id)
     {
-        //
+        DB::table('tb_recuerdos')->where('idRecuerdos',$id)->delete();
+        return redirect('recuerdo')->with('Eliminar','abc');
     }
 
     /*public function cargarRecuerdo($id)

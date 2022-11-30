@@ -2,7 +2,7 @@
 
 <!-- Modal -->
 {{--Cambiamos el id y el aria-labellely--}}
-<div class="modal fade" id="modalEliminar" data-bs-backdrop="static" 
+<div class="modal fade" id="modalEliminar{{$consulta->idRecuerdos}}" data-bs-backdrop="static" 
         data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEliminar" 
             aria-hidden="true">
     <div class="modal-dialog">
@@ -16,55 +16,33 @@
 
     {{--body--}}
         <div class="modal-body">
-          ...
-          <div class="card text-center  mb-5 ">
-
-            <div class="card-header fw-bold"> 
-                {{ date('D/M/Y') }}
-            </div>
-
-            <div class="card-body">
-                
-
-                    <div class="mb-3">
+          <div class="mb-3">
                         
-                        <label class="form-label fw-bold" > <h2> ¿ Deseas eliminar el recuerdo? ... </h2></label>
-                        <h3><label> {{-- {{$consultaId->titulo}} --}} </label></h3>
-                        <label > {{-- {{$consultaId->recuerdo}} --}} </label>
-                        
-                    </div>
-                    
-            </div>
+            <label class="form-label fw-bold" > <h2> ¿ Deseas eliminar el recuerdo? ... </h2></label>
+            <h3><label> {{$consulta->titulo}}  </label></h3>
+            <label > {{$consulta->recuerdo}} </label>
 
-            <form method="POST" action="">
-             {{--   <form method="POST" action="{{route('recuerdo.destroy')}}">   --}} 
-                    
-                @csrf
-                {{--//disfrazate de delete para que te deje pasar la ruta--}}
-                @method('delete')
+            <form method="POST" action="{{route('recuerdo.destroy',$consulta->idRecuerdos)}}">
+              {{--   <form method="POST" action="{{route('recuerdo.destroy')}}">   --}} 
+                     
+                 @csrf
+                 {{--//disfrazate de delete para que te deje pasar la ruta--}}
+                 @method('delete')
+                 
+ 
+             <div class="modal-footer text-muted">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                     
+                     <button type="submit" class="btn btn-danger fw-bold " > si, autorizo </button>
+ 
                 
-
-            <div class="card-footer text-muted">
-                    <a type="button" class="btn btn-warning fw-bold " href="{{route('recuerdo.index')}}" type="submit" > Cancelar </a>
-                    
-                    <button type="submit" class="btn btn-danger fw-bold " > si, autorizo </button>
-
-               
-            </div>
-               </form>      
-                    
-                
+             </div>
+                </form>      
             
+        </div>
+        
+          
             
-            </div>
-
-        </div>
-
-    {{--footer--}}
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary"> si autorizo</button>
-        </div>
 
       </div>
     </div>
